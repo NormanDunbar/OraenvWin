@@ -1,7 +1,7 @@
 # Oraenv for Windows
 
 ## Introduction
-See the README.pdf file in the Docs folder for full details, but ...
+See the README.pdf file in the ``\Doc`` folder for full details, but ...
 
 ``Oraenv`` for Windows provides Windows Oracle DBAs (and developers etc) with an environment setup tool which resembles, *almost* 100%, the utility of the same name supplied on Unix systems.
 
@@ -74,6 +74,6 @@ All you need to do is download the code etc from github (https://github.com/Norm
 
 Once the binaries have been installed/copied, all you need to do is set up a valid ``ORATAB`` file and set the ``ORATAB`` environment variable, preferably in Control Panel so that it is available for all users on the server, and you are good to go. All that is required is to add your database SIDs and HOMEs to the ``ORATAB`` file and the system will be usable.
 
-See the ``README.pdf`` file in the ``\Docs`` folder for full details.
+See the ``README.pdf`` file in the ``\Doc`` folder for full details.
 
 Enjoy.
