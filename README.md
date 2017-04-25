@@ -16,7 +16,7 @@ In addition, it will default the following:
 - NLS_LANG=AMERICAN_AMERICA.WE8ISO8859P1
 - NLS_DATE_FORMAT=yyyy/mm/dd hh24:mi:ss
 
-## Good Stuff
+## What it Does
 If you already have an Oracle environment set up in your shell/batch session, then ``oraenv`` will, on changing the ``ORACLE_SID``:
 
 - Set the correct ``ORACLE_HOME`` for the passed ``ORACLE_SID``;
@@ -69,3 +69,11 @@ rmancat | c:\Oracle\product\11.2.0.4\rdbms\dbhome_1
 oldprod | c:\Oracle\product\11.2.0.2\rdbms\dbhome_3 |# To be decommissioned
 ````  
 
+## Installing
+All you need to do is download the code etc from github (https://github.com/NormanDunbar/OraenvWin) and copy the files in the ``\bin\Release`` folder to somewhere on your ``%PATH%``. You will need the 4 files listed above.
+
+Once the binaries have been installed/copied, all you need to do is set up a valid ``ORATAB`` file and set the ``ORATAB`` environment variable, preferably in Control Panel so that it is available for all users on the server, and you are good to go. All that is required is to add your database SIDs and HOMEs to the ``ORATAB`` file and the system will be usable.
+
+See the ``README.pdf`` file in the ``\Docs`` folder for full details.
+
+Enjoy.
