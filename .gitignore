@@ -38,3 +38,5 @@
 oratab.txt
 *.save
 *.depend
+*.layout
+bin/Debug
