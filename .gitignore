@@ -3,6 +3,12 @@
 *.lo
 *.o
 *.obj
+*.ilc
+*.ild
+*.ilf
+*.ils
+*.map
+*.tds
 
 # Precompiled Headers
 *.gch
@@ -24,6 +30,11 @@
 *.lib
 
 # Executables
-*.exe
+# I want the executables in this case, they are quite small.
 *.out
 *.app
+
+# Other stuff
+oratab.txt
+*.save
+*.depend
