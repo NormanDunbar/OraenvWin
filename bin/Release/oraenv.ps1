@@ -89,8 +89,8 @@ else {
 }
 
 # Get Oracle Home for the new sid
-$oraenv.NewOracleHome = cmd.exe /c ".\DBHome" $($oraenv.NewOracleSID) | Out-String -stream
-$oraenv.NewOracleHome -replace '(?:\s|\r|\n)',''
+$oraenv.NewOracleHome = cmd.exe /c "DBHome" $($oraenv.NewOracleSID) | Out-String
+$oraenv.NewOracleHome = $oraenv.NewOracleHome -replace '(?:\s|\r|\n)',''
 
 if ([string]::IsNullOrEmpty($oraenv.NewOracleHome))
 {
@@ -110,8 +110,8 @@ if ($oraenv.OldOracleSID -eq "NOT_SET")
     $env:ORACLE_SID = $oraenv.NewOracleSID    
 } else {
     # So, we are here, we have to remove the old home from the path and add in the new one.
-    $oraenv.OldOracleHome = cmd.exe /c ".\DBHome" $($oraenv.OldOracleSID) | Out-String -stream
-    $oraenv.OldOracleHome -replace '(?:\s|\r|\n)',''
+    $oraenv.OldOracleHome = cmd.exe /c "DBHome" $($oraenv.OldOracleSID) | Out-String
+    $oraenv.OldOracleHome = $oraenv.OldOracleHome -replace '(?:\s|\r|\n)',''
 
     # Now remove the old oracle home from the path - if it's valid.
     if (-not [string]::IsNullOrEmpty($oraenv.OldOracleHome)) {
