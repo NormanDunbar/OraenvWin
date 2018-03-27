@@ -7,7 +7,7 @@ Calling Conventions:
 
 Examples:
     oraenv - displays current settings
-    oraenv azfs213 - sets environment for azfs213.
+    oraenv orcl - sets environment for orcl
     oraenv broken - barfs!
 
 If no sid is passed then:
