@@ -94,7 +94,7 @@ $oraenv.NewOracleHome -replace '(?:\s|\r|\n)',''
 
 if ([string]::IsNullOrEmpty($oraenv.NewOracleHome))
 {
-    Write-Output "Invalid SID supplied: $($oraenv.NewOracleHome)"
+    Write-Output "Invalid SID supplied: $($oraenv.NewOracleSID)"
     quit
 }
 
