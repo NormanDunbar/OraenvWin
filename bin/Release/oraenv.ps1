@@ -92,14 +92,11 @@ else {
 $oraenv.NewOracleHome = cmd.exe /c ".\DBHome" $($oraenv.NewOracleSID) | Out-String -stream
 $oraenv.NewOracleHome -replace '(?:\s|\r|\n)',''
 
-
 if ([string]::IsNullOrEmpty($oraenv.NewOracleHome))
 {
     Write-Output "Invalid SID supplied: $($oraenv.NewOracleHome)"
     quit
 }
-
-
 
 #Do we need to change PATH? We will always have to change it
 #if this is the first time that ORACLE_SID or ORACLE_HOME are being set.
