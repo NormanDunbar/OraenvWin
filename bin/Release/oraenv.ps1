@@ -45,7 +45,25 @@ function display_details ()
     Write-Output "NLS_LANG=$env:NLS_LANG `n"
 }
 
-#Write-Output 'New SID:' $NewSID
+function dbhome ( $OraSID )
+{
+    #Find oratab file location
+    if ((-not [string]::IsNullOrEmpty($env:ORATAB)) -and (Test-Path $env:ORATAB)) {
+        $oratabloc = $env:ORATAB
+    } elseif ((-not [string]::IsNullOrEmpty($env:ORACLE_BASE)) -and (Test-Path "$env:ORACLE_BASE\oratab.txt")) {
+        $oratabloc = "$env:ORACLE_BASE\oratab.txt"
+    } elseif (Test-Path "oratab.txt") {
+        $oratabloc = "oratab.txt"
+    }
+
+    #Get Oracle Home for SID
+    if (-not [string]::IsNullOrEmpty($oratabloc)) {
+        $OraHome  = Get-Content $oratabloc | Where-Object {$_ -notmatch '^#.*' -and $_ -match $OraSID}| ForEach-Object{ $_.Split('|')[1]; }
+        $OraHome = $OraHome -replace '(?:\s|\r|\n)',''
+    }
+    
+    return $OraHome
+}
 
 $oraenv = @{}
 
@@ -89,8 +107,7 @@ else {
 }
 
 # Get Oracle Home for the new sid
-$oraenv.NewOracleHome = cmd.exe /c "DBHome" $($oraenv.NewOracleSID) | Out-String
-$oraenv.NewOracleHome = $oraenv.NewOracleHome -replace '(?:\s|\r|\n)',''
+$oraenv.NewOracleHome = dbhome($($oraenv.NewOracleSID))
 
 if ([string]::IsNullOrEmpty($oraenv.NewOracleHome))
 {
@@ -110,8 +127,7 @@ if ($oraenv.OldOracleSID -eq "NOT_SET")
     $env:ORACLE_SID = $oraenv.NewOracleSID    
 } else {
     # So, we are here, we have to remove the old home from the path and add in the new one.
-    $oraenv.OldOracleHome = cmd.exe /c "DBHome" $($oraenv.OldOracleSID) | Out-String
-    $oraenv.OldOracleHome = $oraenv.OldOracleHome -replace '(?:\s|\r|\n)',''
+    $oraenv.OldOracleHome = dbhome($($oraenv.OldOracleSID))
 
     # Now remove the old oracle home from the path - if it's valid.
     if (-not [string]::IsNullOrEmpty($oraenv.OldOracleHome)) {
@@ -127,7 +143,7 @@ if ($oraenv.OldOracleSID -eq "NOT_SET")
     $env:PATH="$($oraenv.NewOracleHome)\bin;$newpath"
 }
 
-# We always set these regardless.
+# We always set these regardless
 $env:NLS_DATE_FORMAT='yyyy/mm/dd hh24:mi:ss'
 $env:NLS_LANG='AMERICAN_AMERICA.WE8ISO8859P1'
 
