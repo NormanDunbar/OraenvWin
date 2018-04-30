@@ -47,13 +47,15 @@ function display_details ()
 
 function dbhome ( $OraSID )
 {
+    $scriptdir = $PSScriptRoot
+    
     #Find oratab file location
     if ((-not [string]::IsNullOrEmpty($env:ORATAB)) -and (Test-Path $env:ORATAB)) {
         $oratabloc = $env:ORATAB
     } elseif ((-not [string]::IsNullOrEmpty($env:ORACLE_BASE)) -and (Test-Path "$env:ORACLE_BASE\oratab.txt")) {
         $oratabloc = "$env:ORACLE_BASE\oratab.txt"
-    } elseif (Test-Path "oratab.txt") {
-        $oratabloc = "oratab.txt"
+    } elseif (Test-Path "$scriptdir\oratab.txt") {
+        $oratabloc = "$scriptdir\oratab.txt"
     }
 
     #Get Oracle Home for SID
